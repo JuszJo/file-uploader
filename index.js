@@ -96,7 +96,7 @@ function splitFiles(bufferStringArray, indexes) {
 
 function saveFiles(binaryFiles) {
     binaryFiles.forEach(file => {
-        writeToFile(`./images/${file.name}`, file.file)
+        writeToFile(`./files/${file.name}`, file.file)
     })
 }
 
