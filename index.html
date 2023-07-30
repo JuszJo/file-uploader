@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="file" name="file" multiple>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+<script>
+
+    const form = document.querySelector('form')
+    const input = document.querySelector('input')
+    const formData = new FormData()
+
+    
+    // formData.append("user", "Joshua", "username")
+    // formData.append()
+    
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        
+        Array.from(input.files).forEach((file, index) => {
+            console.log(file);
+            formData.append("file", file, file.name)
+        })
+
+        // formData.append("userfile", input.files[0])
+
+
+        fetch('/upload', {
+            method: "POST",
+            // body: input.files[0]
+            body: formData
+        })
+    })
+
+    
+
+</script>
+</html>
