@@ -54,6 +54,7 @@ function getFileName(newArray) {
         }
     }
 
+    // remove front and back single quote
     const fileNames = fileNamesInfo.map(infoArray => infoArray[1].slice(1, infoArray[1].length - 1))
 
     return fileNames
@@ -68,23 +69,23 @@ function unbreakBufferLine(parsedFiles) {
 }
 
 function splitFiles(bufferStringArray, indexes) {
-    const newArray = []
+    const partitionedFiles = []
     
     indexes.reduce((prev, value) => {
-        newArray.push(bufferStringArray.slice(prev, value))
+        partitionedFiles.push(bufferStringArray.slice(prev, value))
         
         return Math.max(prev, value)
     })
 
-    const fileNames = getFileName(newArray)
+    const fileNames = getFileName(partitionedFiles)
 
     const files = []
 
-    const parsedFiles = removeHeader(newArray)
+    const parsedFiles = removeHeader(partitionedFiles)
 
     const finalFiles = unbreakBufferLine(parsedFiles)
 
-    for(let i = 0; i < newArray.length; ++i) {
+    for(let i = 0; i < partitionedFiles.length; ++i) {
         files.push({
             name: fileNames[i],
             file: finalFiles[i]
