@@ -128,6 +128,18 @@ app.post('/upload', (req, res) => {
 
         // save files
         saveFiles(binaryFiles)
+
+        res.status(200).json({
+            status: "successful"
+        })
+    })
+
+    req.on('error', err => {
+        console.log(err);
+
+        res.status(501).json({
+            error: "something went wrong"
+        })
     })
 })
 
